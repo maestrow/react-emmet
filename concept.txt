@@ -1,0 +1,27 @@
+Root @v,b
+  .badge-groups @v,b
+    BadgeGroup*2 @h
+      .badge-group-name {name:text(1,2,5,10)}
+      .badge-group-body
+        {badges:5-7}
+          Badge
+            {name:word(3,6)}
+  Cards
+    {cards:12-16}
+      Card
+        .card-header {name:lorem(1)}
+        .card-body {description:text(10, 15)}
+
+--
+@v = @vertical
+@h = @horizontal
+@b = @border
+
+
+План:
+
+- генерация в html
+- генерировать 2 файла css: один со стилями из шаблона, второй с пустыми классами для следующего этапа - добавление стилей в brackets.
+- генерация в react
+- live preview: Настроить gulpfile c browser-sync
+- online live demo
