@@ -1,0 +1,33 @@
+/ => Posts
+/post/{id} => Post
+/comment/{id} => CommentPage
+
+cmp Posts
+  Layout
+    posts => Post
+  
+
+    
+
+cmp Post
+  import ...
+  def title => owijfowiejoiwjef oiw
+  .container @v
+    .title
+      {this.title()}
+    ->
+    img href=.date
+    =description
+
+    
+
+
+cmp CommentPage
+
+cmp Layout
+  .container @ew @wed .ojq .oij .qowidj .oqiwj .doiqj .wdoij {
+
+    } 
+    Header @qd @weoid
+    Calendar
+    {p.children}
