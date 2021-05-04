@@ -23,5 +23,9 @@
     "ts-jest": "^26.5.5",
     "ts-node": "^9.1.1",
     "typescript": "^4.2.4"
+  },
+  "dependencies": {
+    "@types/acorn": "^4.0.5",
+    "acorn": "^7.4.1"
   }
 }
