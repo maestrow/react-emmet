@@ -1,0 +1,2 @@
+- https://www.metachris.com/2021/04/starting-a-typescript-project-in-2021/
+- run jest: `npx jest -t "name"` or `npm test -- -t "name"`

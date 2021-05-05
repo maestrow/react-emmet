@@ -1,11 +1,19 @@
-interface IParser {
-  aaa: number;
-  bbb: string;
+import * as P from 'parsimmon'
+import * as cmn from './common'
+
+const getParser = (index: number) => {
+  return P.seqMap(
+    cmn.setState(index), 
+    cmn.bol, 
+    P.index, 
+    P.all,
+    (_1, _2, index, res) => {
+      return [index.offset, res]
+    }
+  )
 }
 
-const x: IParser = {
-  aaa: 1,
-  bbb: "asd"
-}
+const p = getParser(3)
+const res = p.parse("12345")
 
-console.log(x);
+console.log(res)

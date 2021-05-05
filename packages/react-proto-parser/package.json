@@ -26,6 +26,8 @@
   },
   "dependencies": {
     "@types/acorn": "^4.0.5",
-    "acorn": "^7.4.1"
+    "@types/parsimmon": "^1.10.6",
+    "acorn": "^7.4.1",
+    "parsimmon": "^1.17.0"
   }
 }
