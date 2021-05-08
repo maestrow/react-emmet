@@ -15,5 +15,7 @@ module.exports = {
   ],
   rules: {
     "@typescript-eslint/no-this-alias": "off",
+    "@typescript-eslint/explicit-module-boundary-types": "off",
+    "no-debugger": "off"
   }
 };

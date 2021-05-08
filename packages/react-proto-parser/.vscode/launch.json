@@ -7,10 +7,14 @@
     {
       "type": "node",
       "request": "launch",
-      "name": "Launch Program",
+      "name": "Debug TypeScript with webpack",
+      "sourceMaps": true,
+      "preLaunchTask": "webpack",
       "program": "${file}",
-      "preLaunchTask": "tsc: build - tsconfig.json",
-      "outFiles": ["${workspaceFolder}/dist/tsc/**/*.js"]
+      "cwd": "${workspaceFolder}",
+      "outFiles": [
+        "${workspaceFolder}/dist/**/*.js"
+      ]
     }
   ]
 }
