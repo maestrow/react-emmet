@@ -982,6 +982,38 @@ _.many = function () {
   });
 };
 
+_.until = function(parser) {
+  const self = this;
+
+  return Parsimmon(function(input, i) {
+    const accum = [];
+    const until = Parsimmon.notFollowedBy(parser)
+    let result = undefined;
+
+    for (;;) {
+      result = mergeReplies(self._(input, i), result);
+     
+      if (result.status) {
+        if (i === result.index) {
+          throw new Error(
+            "infinite loop detected in .until() parser --- calling .until() on " +
+              "a parser which can accept zero characters is usually the cause"
+          );
+        }
+        i = result.index;
+        accum.push(result.value);
+        
+        let untilRes = until._(input, i)
+        if (!untilRes.status) {
+          return mergeReplies(makeSuccess(i, accum), result);
+        }
+      } else {
+        return mergeReplies(makeSuccess(i, accum), result);
+      }
+    }
+  });
+};
+
 _.tieWith = function (separator) {
   assertString(separator);
   return this.map(function (args) {
@@ -1376,6 +1408,12 @@ var eof = Parsimmon(function (input, i) {
   return makeSuccess(i, null);
 });
 
+var bol = Parsimmon(function(input, i) {
+  if (i === 0 || input.charAt(i-1) === '\n')
+    return makeSuccess(i, null);
+  return makeFailure(i, 'not BOL');
+});
+
 var digit = regexp(/[0-9]/).desc("a digit");
 var digits = regexp(/[0-9]*/).desc("optional digits");
 var letter = regexp(/[a-z]/i).desc("a letter");
@@ -1387,10 +1425,12 @@ var lf = string("\n");
 var crlf = string("\r\n");
 var newline = alt(crlf, lf, cr).desc("newline");
 var end = alt(newline, eof);
+var eol = seq(optWhitespace, end);
 
 Parsimmon.all = all;
 Parsimmon.alt = alt;
 Parsimmon.any = any;
+Parsimmon.bol = bol;
 Parsimmon.cr = cr;
 Parsimmon.createLanguage = createLanguage;
 Parsimmon.crlf = crlf;
@@ -1400,6 +1440,7 @@ Parsimmon.digits = digits;
 Parsimmon.empty = empty;
 Parsimmon.end = end;
 Parsimmon.eof = eof;
+Parsimmon.eol = eol;
 Parsimmon.fail = fail;
 Parsimmon.formatError = formatError;
 Parsimmon.index = index;

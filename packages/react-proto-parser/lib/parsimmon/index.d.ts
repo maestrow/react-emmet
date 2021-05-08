@@ -183,9 +183,6 @@
        * parser.skip(Parsimmon.notFollowedBy(anotherParser)).
        */
       notFollowedBy(anotherParser: Parser<any>): Parser<T>;
-      
-      until(parser: Parser<any>): Parser<T>
-      
       /**
        * Returns a parser that looks for whatever arg wants to parse, but does not
        * consume it. Yields the same result as parser. Equivalent to
@@ -207,6 +204,10 @@
        * expects parser zero or more times, and yields an array of the results.
        */
       many(): Parser<T[]>;
+      /**
+       * Parse this parser until parser succeeds
+       */
+      until(parser: Parser<any>): Parser<T[]>;
       /**
        * expects parser exactly n times, and yields an array of the results.
        */
@@ -569,6 +570,15 @@
      * consumes and yields the entire remainder of the stream.
      */
     const all: Parser<string>;
+    /**
+     * Expects beginning of line.
+     */
+    const bol: Parser<undefined>;
+    /**
+     * Expects end of line.
+     * Equivalent to seq(optWhitespace, end)
+     */
+    const eol: Parser<undefined>;
     /**
      * expects the end of the stream.
      */
