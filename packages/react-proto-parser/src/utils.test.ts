@@ -1,5 +1,5 @@
-import * as P from 'parsimmon'
-import * as cmn from './common'
+import * as P from '@lib/parsimmon'
+import * as cmn from './utils'
 
 const getParser = (index: number) => {
   return P.seqMap(
@@ -11,7 +11,7 @@ const getParser = (index: number) => {
       return [index.offset, res]
     }
   )
-}
+} 
 
 const checkFailOffset = (res: P.Result<unknown>, offset: number) => {
   expect(res.status).toBe(false)

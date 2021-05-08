@@ -2,7 +2,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 
-import * as P from 'parsimmon';
+import * as P from '@lib/parsimmon';
 
 const bol = P.custom(function(success, failure) {
   return function(input, i) {
@@ -17,8 +17,7 @@ const component = P.any
 
 const route = P.seq(
   bol, 
-  P.string("/"), 
-  P.
+  P.string("/")
 );
 
 const definition = P.alt(route, component)

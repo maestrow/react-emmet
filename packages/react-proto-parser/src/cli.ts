@@ -1,19 +1,19 @@
-import * as P from 'parsimmon'
-import * as cmn from './common'
+/* eslint-disable @typescript-eslint/no-namespace */
+/* eslint-disable prefer-const */
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 
-const getParser = (index: number) => {
-  return P.seqMap(
-    cmn.setState(index), 
-    cmn.bol, 
-    P.index, 
-    P.all,
-    (_1, _2, index, res) => {
-      return [index.offset, res]
-    }
-  )
-}
+import * as P from '@lib/parsimmon'
+import * as u from './utils'
+import * as m from './main'
 
-const p = getParser(3)
-const res = p.parse("12345")
+const until = P.string("=>")
 
-console.log(res)
+const p = P.seq(
+  //P.any.until(until),
+  P.any.many()
+)
+
+const res = p.parse("abcd=>123")
+
+console.dir(res, {depth: null})
